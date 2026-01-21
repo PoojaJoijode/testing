@@ -1,0 +1,326 @@
+ 
+/* start css.sty */
+.cmmi-7{font-size:70%;font-style: italic;}
+.cmmi-10{font-style: italic;}
+.cmsy-7{font-size:70%;}
+.cmr-17{font-size:170%;}
+.cmr-12{font-size:120%;}
+.cmtt-10{font-family: monospace,monospace;}
+.cmr-9{font-size:90%;}
+.cmti-10{ font-style: italic;}
+.small-caps{font-variant: small-caps; }
+@media print {span.next {visibility:hidden;}}
+p{margin-top:0;margin-bottom:0}
+p.indent{text-indent:0;}
+p + p{margin-top:1em;}
+p + div, p + pre {margin-top:1em;}
+div + p, pre + p {margin-top:1em;}
+a { overflow-wrap: break-word; word-wrap: break-word; word-break: break-word; hyphens: auto; }
+@media print {div.crosslinks {visibility:hidden;}}
+table.tabular{border-collapse: collapse; border-spacing: 0;}
+a img { border-top: 0; border-left: 0; border-right: 0; }
+center { margin-top:1em; margin-bottom:1em; }
+td center { margin-top:0em; margin-bottom:0em; }
+.Canvas { position:relative; }
+img.math{vertical-align:middle;}
+div.par-math-display, div.math-display{text-align:center;}
+li p.indent { text-indent: 0em }
+li p:first-child{ margin-top:0em; }
+li p:last-child, li div:last-child { margin-bottom:0.5em; }
+li p:first-child{ margin-bottom:0; }
+li p~ul:last-child, li p~ol:last-child{ margin-bottom:0.5em; }
+.enumerate1 {list-style-type:decimal;}
+.enumerate2 {list-style-type:lower-alpha;}
+.enumerate3 {list-style-type:lower-roman;}
+.enumerate4 {list-style-type:upper-alpha;}
+div.newtheorem { margin-bottom: 2em; margin-top: 2em;}
+div.newtheorem .head{font-weight: bold;}
+.obeylines-h,.obeylines-v {white-space: nowrap; }
+div.obeylines-v p { margin-top:0; margin-bottom:0; }
+.overline{ text-decoration:overline; }
+.overline img{ border-top: 1px solid black; }
+td.displaylines {text-align:center; white-space:nowrap;}
+.centerline {text-align:center;}
+.rightline {text-align:right;}
+pre.verbatim {font-family: monospace,monospace; text-align:left; clear:both; }
+.fbox {padding-left:3.0pt; padding-right:3.0pt; text-indent:0pt; border:solid black 0.4pt; }
+div.fbox {display:table}
+div.center div.fbox {text-align:center; clear:both; padding-left:3.0pt; padding-right:3.0pt; text-indent:0pt; border:solid black 0.4pt; }
+div.minipage{width:100%;}
+div.center, div.center div.center {text-align: center; margin-left:1em; margin-right:1em;}
+div.center div {text-align: left;}
+div.flushright, div.flushright div.flushright {text-align: right;}
+div.flushright div {text-align: left;}
+div.flushleft {text-align: left;}
+.underline{ text-decoration:underline; }
+.underline img{ border-bottom: 1px solid black; margin-bottom:1pt; }
+.framebox-c, .framebox-l, .framebox-r { padding-left:3.0pt; padding-right:3.0pt; text-indent:0pt; border:solid black 0.4pt; }
+.framebox-c {text-align:center;}
+.framebox-l {text-align:left;}
+.framebox-r {text-align:right;}
+span.thank-mark{ vertical-align: super }
+span.footnote-mark sup.textsuperscript, span.footnote-mark a sup.textsuperscript{ font-size:80%; }
+div.tabular, div.center div.tabular {text-align: center; margin-top:0.5em; margin-bottom:0.5em; }
+table.tabular td p{margin-top:0em;}
+table.tabular {margin-left: auto; margin-right: auto;}
+td p:first-child{ margin-top:0em; }
+td p:last-child{ margin-bottom:0em; }
+div.td00{ margin-left:0pt; margin-right:0pt; }
+div.td01{ margin-left:0pt; margin-right:5pt; }
+div.td10{ margin-left:5pt; margin-right:0pt; }
+div.td11{ margin-left:5pt; margin-right:5pt; }
+table[rules] {border-left:solid black 0.4pt; border-right:solid black 0.4pt; }
+td.td00{ padding-left:0pt; padding-right:0pt; }
+td.td01{ padding-left:0pt; padding-right:5pt; }
+td.td10{ padding-left:5pt; padding-right:0pt; }
+td.td11{ padding-left:5pt; padding-right:5pt; }
+table[rules] {border-left:solid black 0.4pt; border-right:solid black 0.4pt; }
+.hline hr, .cline hr{ height : 0px; margin:0px; }
+.hline td, .cline td{ padding: 0; }
+.hline hr, .cline hr{border:none;border-top:1px solid black;}
+.hline {border-top: 1px solid black;}
+.tabbing-right {text-align:right;}
+div.float, div.figure {margin-left: auto; margin-right: auto;}
+div.float img {text-align:center;}
+div.figure img {text-align:center;}
+.marginpar,.reversemarginpar {width:20%; float:right; text-align:left; margin-left:auto; margin-top:0.5em; font-size:85%; text-decoration:underline;}
+.marginpar p,.reversemarginpar p{margin-top:0.4em; margin-bottom:0.4em;}
+.reversemarginpar{float:left;}
+table.equation {width:100%;}
+.equation td{text-align:center; }
+td.equation { margin-top:1em; margin-bottom:1em; } 
+td.equation-label { width:5%; text-align:center; }
+td.eqnarray4 { width:5%; white-space: normal; }
+td.eqnarray2 { width:5%; }
+table.eqnarray-star, table.eqnarray {width:100%;}
+div.eqnarray{text-align:center;}
+div.array {text-align:center;}
+div.pmatrix {text-align:center;}
+table.pmatrix {width:100%;}
+span.pmatrix img{vertical-align:middle;}
+div.pmatrix {text-align:center;}
+table.pmatrix {width:100%;}
+span.bar-css {text-decoration:overline;}
+img.cdots{vertical-align:middle;}
+.partToc a, .partToc, .likepartToc a, .likepartToc {line-height: 200%; font-weight:bold; font-size:110%;}
+.index-item, .index-subitem, .index-subsubitem {display:block}
+div.caption {text-indent:-2em; margin-left:3em; margin-right:1em; text-align:left;}
+div.caption span.id{font-weight: bold; white-space: nowrap; }
+h1.partHead{text-align: center}
+p.bibitem { text-indent: -2em; margin-left: 2em; margin-top:0.6em; margin-bottom:0.6em; }
+p.bibitem-p { text-indent: 0em; margin-left: 2em; margin-top:0.6em; margin-bottom:0.6em; }
+.paragraphHead, .likeparagraphHead { margin-top:2em; font-weight: bold;}
+.subparagraphHead, .likesubparagraphHead { font-weight: bold;}
+.verse{white-space:nowrap; margin-left:2em}
+div.maketitle {text-align:center;}
+h2.titleHead{text-align:center;}
+div.maketitle{ margin-bottom: 2em; }
+div.author, div.date {text-align:center;}
+div.thanks{text-align:left; margin-left:10%; font-size:85%; font-style:italic; }
+div.author{white-space: nowrap;}
+div.abstract p {margin-left:5%; margin-right:5%;}
+div.abstract {width:100%;}
+.abstracttitle{text-align:center;margin-bottom:1em;}
+.subsectionToc, .likesubsectionToc {margin-left:2em;}
+.subsubsectionToc, .likesubsubsectionToc {margin-left:4em;}
+div.tabular, div.center div.tabular {text-align: center; margin-top:0.5em; margin-bottom:0.5em; }
+table.tabular td p{margin-top:0em;}
+table.tabular {margin-left: auto; margin-right: auto;}
+td p:first-child{ margin-top:0em; }
+td p:last-child{ margin-bottom:0em; }
+div.td00{ margin-left:0pt; margin-right:0pt; }
+div.td01{ margin-left:0pt; margin-right:5pt; }
+div.td10{ margin-left:5pt; margin-right:0pt; }
+div.td11{ margin-left:5pt; margin-right:5pt; }
+table[rules] {border-left:solid black 0.4pt; border-right:solid black 0.4pt; }
+td.td00{ padding-left:0pt; padding-right:0pt; }
+td.td01{ padding-left:0pt; padding-right:5pt; }
+td.td10{ padding-left:5pt; padding-right:0pt; }
+td.td11{ padding-left:5pt; padding-right:5pt; }
+table[rules] {border-left:solid black 0.4pt; border-right:solid black 0.4pt; }
+.hline hr, .cline hr{ height : 0px; margin:0px; }
+.hline td, .cline td{ padding: 0; }
+.hline hr, .cline hr{border:none;border-top:1px solid black;}
+.hline {border-top: 1px solid black;}
+div.array {text-align:center;}
+dt.printshorthands{float:left; clear:left; margin-right:1em;}
+dd.thebibliography {margin-left: 2.5em;}
+dt.thebibliography {float:left; clear:left; margin-right:1em;}
+/* end css.sty */
+
+/* Hide TeX4ht navigation links */
+.crosslinks,
+.navibar {
+    display: none;
+}
+
+
+/* === Clarkson-like clean academic page styling for TeX4ht output === */
+
+:root{
+  --bg: #f3f5f2;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --brand: #0b5a46;     /* teal/green like the 2nd screenshot */
+  --brand-dark: #094538;
+  --card: rgba(255,255,255,0.0);
+}
+
+/* Basic reset */
+*,
+*::before,
+*::after{ box-sizing: border-box; }
+
+html{ -webkit-text-size-adjust: 100%; }
+body{
+  margin: 0;
+  background: var(--bg);
+  color: #0b5a46 !important;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.65;
+
+  /* Centered column like the Clarkson page */
+  max-width: 1180px;
+  padding: 55px 14px 68px;
+  margin: 0 auto;
+}
+p, div{
+  margin-top: 0;
+}
+
+/* tighten bibliography block start */
+dl.thebibliography{
+  margin-top: 6px !important;
+}
+
+/* ===== Override patch (paste at END of web.css) ===== */
+
+/* White page like the Clarkson site + tighter spacing */
+:root{
+  --bg: #ffffff;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --brand: #0b5a46;
+  --brand-dark: #094538;
+}
+
+
+/* Clarkson page doesn't show TeX4ht nav */
+.crosslinks{ display: none !important; }
+
+/* Title sizing like the 2nd image */
+h3.sectionHead{
+  font-size: 48px !important;   /* smaller than before */
+  font-weight: 500 !important;
+  line-height: 1.1 !important;
+  margin: 0 0 16px !important;  /* tighter */
+  color: var(--brand) !important;
+  letter-spacing: -0.02em;
+}
+
+/* Hide the section number "1" */
+h3.sectionHead .titlemark{ display: none !important; }
+
+/* Slightly tighter bibliography spacing + neutral numbering (not green) */
+dl.thebibliography{ margin: 0 !important; padding: 0 !important; }
+
+dl.thebibliography > dt.thebibliography{
+  width: 2.0em !important;
+  text-align: right !important;
+  color: var(--text) !important;     /* match Clarkson (black-ish) */
+  font-weight: 600 !important;
+}
+
+dl.thebibliography > dd.thebibliography{
+  margin: 0 0 14px 2.8em !important; /* tighter left indent + less vertical gap */
+  line-height: 1.7 !important;
+}
+
+/* Link look */
+a{
+  color: var(--brand) !important;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+a:hover{ color: var(--brand-dark) !important; }
+
+
+/* ===== Table formatting (clean Clarkson-like) ===== */
+
+/* Make tables readable + centered */
+table{
+  width: 100% !important;
+  max-width: 980px;
+  margin: 8px auto 24px !important;
+  border-collapse: collapse !important;
+  border-spacing: 0 !important;
+  font-size: 16px;
+  table-layout: fixed !important;   /* makes column widths apply */
+}
+
+/* Header row (normal HTML tables) */
+thead th{
+  text-align: left;
+  font-weight: 400;
+  padding: 10px 12px;
+  border-bottom: 2px solid #1f2937;
+  color: #0b5a46;
+}
+
+/* Body cells (normal HTML tables) */
+tbody td{
+  padding: 10px 12px;
+  border-bottom: 1px solid #e5e7eb;
+  vertical-align: top;
+}
+
+/* Zebra striping + hover (normal HTML tables) */
+tbody tr:nth-child(even){ background: #f8fafc; }
+tbody tr:hover{ background: #eef6f2; }
+
+/* ---------- TeX4ht tables FIX (this is what you were missing) ---------- */
+/* TeX4ht uses <table class="tabular"> and NO thead/tbody */
+table.tabular td{
+  padding: 10px 12px !important;
+  border-bottom: 1px solid #e5e7eb !important;
+  vertical-align: top;
+}
+
+/* First row in TeX4ht is the “header” row */
+table.tabular tr:first-child td{
+  font-weight: 400 !important;
+  border-bottom: 2px solid #1f2937 !important;
+  color: #0b5a46 !important;
+  background: #eaf5ef !important;
+}
+
+/* Zebra + hover for TeX4ht tables */
+table.tabular tr:nth-child(even){ background: #f8fafc; }
+table.tabular tr:hover{ background: #eef6f2; }
+
+/* KEY: TeX4ht defines 6 <col> in colgroup. Control widths there. */
+table.tabular colgroup col:nth-child(1){ width: 55px !important; }   /* numbering */
+table.tabular colgroup col:nth-child(2){ width: auto !important; }   /* Sponsor/Title */
+table.tabular colgroup col:nth-child(3){ width: 140px !important; }  /* Alloc/Total */
+table.tabular colgroup col:nth-child(4){ width: 170px !important; }  /* Dates */
+table.tabular colgroup col:nth-child(5),
+table.tabular colgroup col:nth-child(6){ width: 0px !important; }    /* kill extra cols */
+
+/* Wrapping rules: Sponsor wraps, money/date never overlap */
+table.tabular td:nth-child(2){
+  white-space: normal !important;
+  overflow-wrap: anywhere !important;
+}
+table.tabular td:nth-child(3),
+table.tabular td:nth-child(4){
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+/* Force padding + remove side borders everywhere */
+td, th{ padding: 10px 12px !important; }
+table, th, td{
+  border-left: none !important;
+  border-right: none !important;
+}
