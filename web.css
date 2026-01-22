@@ -157,13 +157,19 @@ dt.thebibliography {float:left; clear:left; margin-right:1em;}
 
 /* === Clarkson-like clean academic page styling for TeX4ht output === */
 
+/* === Clarkson-like clean academic page styling for TeX4ht output (CLEAN + FIXED) === */
+
 :root{
-  --bg: #f3f5f2;
+  --bg: #ffffff;
   --text: #1f2937;
   --muted: #6b7280;
-  --brand: #0b5a46;     /* teal/green like the 2nd screenshot */
+  --brand: #0b5a46;
   --brand-dark: #094538;
-  --card: rgba(255,255,255,0.0);
+
+  /* control page padding here */
+  --page-pad-top: 16px;
+  --page-pad-x: 14px;
+  --page-pad-bottom: 48px;
 }
 
 /* Basic reset */
@@ -172,6 +178,8 @@ dt.thebibliography {float:left; clear:left; margin-right:1em;}
 *::after{ box-sizing: border-box; }
 
 html{ -webkit-text-size-adjust: 100%; }
+html, body{ overflow-x: hidden; }
+
 body{
   margin: 0;
   background: var(--bg);
@@ -179,64 +187,52 @@ body{
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   line-height: 1.65;
 
-  /* Centered column like the Clarkson page */
+  /* centered column */
   max-width: 1180px;
-  padding: 55px 14px 68px;
+  padding: var(--page-pad-top) var(--page-pad-x) var(--page-pad-bottom);
   margin: 0 auto;
 }
-p, div{
-  margin-top: 0;
+
+p, div{ margin-top: 0; }
+
+/* If you add 'embedded' class on <html>, this removes extra spacing in WordPress iframe */
+html.embedded body{
+  max-width: 100% !important;
+  padding: 0 0 24px !important;
 }
 
-/* tighten bibliography block start */
-dl.thebibliography{
-  margin-top: 6px !important;
-}
-
-/* ===== Override patch (paste at END of web.css) ===== */
-
-/* White page like the Clarkson site + tighter spacing */
-:root{
-  --bg: #ffffff;
-  --text: #1f2937;
-  --muted: #6b7280;
-  --brand: #0b5a46;
-  --brand-dark: #094538;
-}
-
-
-/* Clarkson page doesn't show TeX4ht nav */
+/* Hide TeX4ht navigation */
 .crosslinks{ display: none !important; }
 
-/* Title sizing like the 2nd image */
+/* Title sizing like Clarkson */
 h3.sectionHead{
-  font-size: 48px !important;   /* smaller than before */
+  font-size: 48px !important;
   font-weight: 500 !important;
   line-height: 1.1 !important;
-  margin: 0 0 16px !important;  /* tighter */
+  margin: 0 0 16px !important;
   color: var(--brand) !important;
   letter-spacing: -0.02em;
 }
 
-/* Hide the section number "1" */
-h3.sectionHead .titlemark{ display: none !important; }
+/* Hide section number "1" */
+h3.sectionHead .titlemark{ display:none !important; }
 
-/* Slightly tighter bibliography spacing + neutral numbering (not green) */
+/* tighten bibliography */
 dl.thebibliography{ margin: 0 !important; padding: 0 !important; }
 
 dl.thebibliography > dt.thebibliography{
   width: 2.0em !important;
   text-align: right !important;
-  color: var(--text) !important;     /* match Clarkson (black-ish) */
+  color: var(--text) !important;
   font-weight: 600 !important;
 }
 
 dl.thebibliography > dd.thebibliography{
-  margin: 0 0 14px 2.8em !important; /* tighter left indent + less vertical gap */
+  margin: 0 0 14px 2.8em !important;
   line-height: 1.7 !important;
 }
 
-/* Link look */
+/* links */
 a{
   color: var(--brand) !important;
   text-decoration: underline;
@@ -244,10 +240,10 @@ a{
 }
 a:hover{ color: var(--brand-dark) !important; }
 
+/* =========================================================
+   TABLES (normal HTML tables)
+   ========================================================= */
 
-/* ===== Table formatting (clean Clarkson-like) ===== */
-
-/* Make tables readable + centered */
 table{
   width: 100% !important;
   max-width: 980px;
@@ -255,10 +251,9 @@ table{
   border-collapse: collapse !important;
   border-spacing: 0 !important;
   font-size: 16px;
-  table-layout: fixed !important;   /* makes column widths apply */
+  table-layout: fixed !important;
 }
 
-/* Header row (normal HTML tables) */
 thead th{
   text-align: left;
   font-weight: 400;
@@ -267,26 +262,32 @@ thead th{
   color: #09503e;
 }
 
-/* Body cells (normal HTML tables) */
 tbody td{
   padding: 10px 12px;
   border-bottom: 1px solid #e5e7eb;
   vertical-align: top;
 }
 
-/* Zebra striping + hover (normal HTML tables) */
 tbody tr:nth-child(even){ background: #f8fafc; }
 tbody tr:hover{ background: #eef6f2; }
 
-/* ---------- TeX4ht tables FIX (this is what you were missing) ---------- */
-/* TeX4ht uses <table class="tabular"> and NO thead/tbody */
+/* Keep long text wrapping nicely */
+table td{
+  overflow-wrap: anywhere;
+  word-break: normal;
+}
+
+/* =========================================================
+   TABLES (TeX4ht tables: <table class="tabular"> no thead/tbody)
+   ========================================================= */
+
 table.tabular td{
   padding: 10px 12px !important;
   border-bottom: 1px solid #e5e7eb !important;
   vertical-align: top;
 }
 
-/* First row in TeX4ht is the “header” row */
+/* First row behaves like header */
 table.tabular tr:first-child td{
   font-weight: 400 !important;
   border-bottom: 2px solid #1f2937 !important;
@@ -294,28 +295,34 @@ table.tabular tr:first-child td{
   background: #eaf5ef !important;
 }
 
-/* Zebra + hover for TeX4ht tables */
+/* Zebra + hover */
 table.tabular tr:nth-child(even){ background: #f8fafc; }
 table.tabular tr:hover{ background: #eef6f2; }
 
-/* KEY: TeX4ht defines 6 <col> in colgroup. Control widths there. */
-table.tabular colgroup col:nth-child(1){ width: 55px !important; }   /* numbering */
-table.tabular colgroup col:nth-child(2){ width: auto !important; }   /* Sponsor/Title */
-table.tabular colgroup col:nth-child(3){ width: 140px !important; }  /* Alloc/Total */
-table.tabular colgroup col:nth-child(4){ width: 170px !important; }  /* Dates */
-table.tabular colgroup col:nth-child(5),
-table.tabular colgroup col:nth-child(6){ width: 0px !important; }    /* kill extra cols */
+/* Width controls: keep these only if your TeX4ht outputs 6 cols often */
+table.tabular colgroup col:nth-child(1){ width: 55px !important; }   /* numbering/Year */
+table.tabular colgroup col:nth-child(2){ width: auto !important; }   /* Title */
+table.tabular colgroup col:nth-child(3){ width: 220px !important; }  /* Student / Amount */
+table.tabular colgroup col:nth-child(4){ width: 200px !important; }  /* Dates (if present) */
+/* DO NOT "kill" extra cols unless you're 100% sure they are always empty */
+/* table.tabular colgroup col:nth-child(5),
+table.tabular colgroup col:nth-child(6){ width: 0px !important; } */
 
-/* Wrapping rules: Sponsor wraps, money/date never overlap */
-table.tabular td:nth-child(2){
-  white-space: normal !important;
-  overflow-wrap: anywhere !important;
-}
+/* IMPORTANT FIX:
+   You had ellipsis/nowrap on col 3/4 which CUT OFF student names.
+   We allow wrapping so the full text is visible. */
+table.tabular td:nth-child(2),
 table.tabular td:nth-child(3),
 table.tabular td:nth-child(4){
+  white-space: normal !important;
+  overflow-wrap: anywhere !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+}
+
+/* Optional: if you want dates to stay one line without hiding text, use nowrap ONLY */
+table.tabular td:nth-child(4){
   white-space: nowrap !important;
-  overflow: hidden !important;
-  text-overflow: ellipsis !important;
 }
 
 /* Force padding + remove side borders everywhere */
@@ -327,12 +334,8 @@ table, th, td{
 
 /* =========================================================
    Publications-style TOC bars (TeX4ht)
-   Goal: Make the "Contents" list look like the green bars
-   with yellow arrow (as in Clarkson Publications page).
-   Paste at END of web.css.
    ========================================================= */
 
-/* Container */
 .tableofcontents{
   margin-top: 12px !important;
   max-width: 1100px;
@@ -340,10 +343,9 @@ table, th, td{
   margin-right: auto !important;
 }
 
-/* TeX4ht often uses <br> between items — remove it so blocks stack clean */
 .tableofcontents br{ display:none !important; }
 
-/* Each TOC line is usually a span like .sectionToc/.likesubsectionToc etc */
+/* Each TOC line */
 .tableofcontents .sectionToc,
 .tableofcontents .likesectionToc,
 .tableofcontents .subsectionToc,
@@ -355,11 +357,11 @@ table, th, td{
   display:block !important;
   margin: 0 0 14px !important;
 
-  /* Hide the leading numbers even if they are plain text (e.g., "1 ") */
+  /* hides raw leading numbering */
   font-size: 0 !important;
 }
 
-/* The clickable bar */
+/* clickable bar */
 .tableofcontents .sectionToc a,
 .tableofcontents .likesectionToc a,
 .tableofcontents .subsectionToc a,
@@ -368,7 +370,7 @@ table, th, td{
 .tableofcontents .likesubsubsectionToc a,
 .tableofcontents .paragraphToc a,
 .tableofcontents .likeparagraphToc a{
-  font-size: 18px !important; /* restore after parent font-size:0 */
+  font-size: 18px !important; /* restore */
   line-height: 1.25 !important;
 
   display:flex !important;
@@ -378,14 +380,13 @@ table, th, td{
   background: var(--brand) !important;
   color: #ffffff !important;
 
-  padding: 18px  26px !important;
+  padding: 18px 26px !important;
   text-decoration: underline !important;
   text-underline-offset: 4px;
   font-weight: 700 !important;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
 }
 
-/* Yellow arrow icon on the left */
 .tableofcontents .sectionToc a::before,
 .tableofcontents .likesectionToc a::before,
 .tableofcontents .subsectionToc a::before,
@@ -403,25 +404,15 @@ table, th, td{
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-position: center;
-
-  /* ensure no underline on the icon area */
   text-decoration: none !important;
 }
 
-
-/* Hover like Clarkson */
 .tableofcontents a:hover{
   background: var(--brand-dark) !important;
   color: #ffffff !important;
 }
 
-/* If TeX4ht wraps TOC numbers in spans, hide those too */
+/* Hide TOC markers if TeX4ht uses spans */
 .tableofcontents .titlemark,
-.tableofcontents .label{
-  display:none !important;
-}
+.tableofcontents .label{ display:none !important; }
 
-/* Optional: make "Contents" header smaller/tighter (keep it, but cleaner) */
-h3.sectionHead, h2.sectionHead, h3.likesectionHead, h2.likesectionHead{
-  margin-bottom: 18px !important;
-}
