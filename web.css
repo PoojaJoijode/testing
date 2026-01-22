@@ -175,7 +175,7 @@ html{ -webkit-text-size-adjust: 100%; }
 body{
   margin: 0;
   background: var(--bg);
-  color: #0b5a46 !important;
+  color: #074132 !important;
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   line-height: 1.65;
 
@@ -264,7 +264,7 @@ thead th{
   font-weight: 400;
   padding: 10px 12px;
   border-bottom: 2px solid #1f2937;
-  color: #0b5a46;
+  color: #09503e;
 }
 
 /* Body cells (normal HTML tables) */
@@ -290,7 +290,7 @@ table.tabular td{
 table.tabular tr:first-child td{
   font-weight: 400 !important;
   border-bottom: 2px solid #1f2937 !important;
-  color: #0b5a46 !important;
+  color: #094234 !important;
   background: #eaf5ef !important;
 }
 
