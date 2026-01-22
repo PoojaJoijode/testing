@@ -11,7 +11,28 @@
 <!-- xhtml,3,next,charset=utf-8,pmathml,html --> 
 <meta name="src" content="web.tex" /> 
 <link rel="stylesheet" type="text/css" href="web.css" /> 
-</head><body 
+</head>
+  <script>
+  (function () {
+    function sendHeight() {
+      const h = Math.max(
+        document.body.scrollHeight,
+        document.documentElement.scrollHeight
+      );
+      parent.postMessage({ type: "IFRAME_HEIGHT", height: h }, "*");
+    }
+
+    window.addEventListener("load", () => { sendHeight(); setTimeout(sendHeight, 500); });
+    window.addEventListener("resize", sendHeight);
+
+    if ("ResizeObserver" in window) {
+      new ResizeObserver(sendHeight).observe(document.documentElement);
+    }
+  })();
+</script>
+
+  
+  <body 
 >
 <!--l. 8--><div class="crosslinks"><p class="noindent">[<a 
 href="webse1.html" >next</a>] [<a 
