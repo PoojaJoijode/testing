@@ -324,3 +324,104 @@ table, th, td{
   border-left: none !important;
   border-right: none !important;
 }
+
+/* =========================================================
+   Publications-style TOC bars (TeX4ht)
+   Goal: Make the "Contents" list look like the green bars
+   with yellow arrow (as in Clarkson Publications page).
+   Paste at END of web.css.
+   ========================================================= */
+
+/* Container */
+.tableofcontents{
+  margin-top: 12px !important;
+  max-width: 1100px;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* TeX4ht often uses <br> between items — remove it so blocks stack clean */
+.tableofcontents br{ display:none !important; }
+
+/* Each TOC line is usually a span like .sectionToc/.likesubsectionToc etc */
+.tableofcontents .sectionToc,
+.tableofcontents .likesectionToc,
+.tableofcontents .subsectionToc,
+.tableofcontents .likesubsectionToc,
+.tableofcontents .subsubsectionToc,
+.tableofcontents .likesubsubsectionToc,
+.tableofcontents .paragraphToc,
+.tableofcontents .likeparagraphToc{
+  display:block !important;
+  margin: 0 0 14px !important;
+
+  /* Hide the leading numbers even if they are plain text (e.g., "1 ") */
+  font-size: 0 !important;
+}
+
+/* The clickable bar */
+.tableofcontents .sectionToc a,
+.tableofcontents .likesectionToc a,
+.tableofcontents .subsectionToc a,
+.tableofcontents .likesubsectionToc a,
+.tableofcontents .subsubsectionToc a,
+.tableofcontents .likesubsubsectionToc a,
+.tableofcontents .paragraphToc a,
+.tableofcontents .likeparagraphToc a{
+  font-size: 18px !important; /* restore after parent font-size:0 */
+  line-height: 1.25 !important;
+
+  display:flex !important;
+  align-items:center;
+  gap: 16px;
+
+  background: var(--brand) !important;
+  color: #ffffff !important;
+
+  padding: 18px  26px !important;
+  text-decoration: underline !important;
+  text-underline-offset: 4px;
+  font-weight: 700 !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+}
+
+/* Yellow arrow icon on the left */
+.tableofcontents .sectionToc a::before,
+.tableofcontents .likesectionToc a::before,
+.tableofcontents .subsectionToc a::before,
+.tableofcontents .likesubsectionToc a::before,
+.tableofcontents .subsubsectionToc a::before,
+.tableofcontents .likesubsubsectionToc a::before,
+.tableofcontents .paragraphToc a::before,
+.tableofcontents .likeparagraphToc a::before{
+  content: "" !important;
+  width: 26px;
+  height: 26px;
+  flex: 0 0 26px;
+
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%23facc15' d='M4 11h11.17l-4.58-4.59L12 5l7 7-7 7-1.41-1.41L15.17 13H4z'/></svg>");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center;
+
+  /* ensure no underline on the icon area */
+  text-decoration: none !important;
+}
+
+
+/* Hover like Clarkson */
+.tableofcontents a:hover{
+  background: var(--brand-dark) !important;
+  color: #ffffff !important;
+}
+
+/* If TeX4ht wraps TOC numbers in spans, hide those too */
+.tableofcontents .titlemark,
+.tableofcontents .label{
+  display:none !important;
+}
+
+/* Optional: make "Contents" header smaller/tighter (keep it, but cleaner) */
+h3.sectionHead, h2.sectionHead, h3.likesectionHead, h2.likesectionHead{
+  margin-bottom: 18px !important;
+}
