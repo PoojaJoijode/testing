@@ -1,23 +1,27 @@
-<script>
 (function () {
-  function sendHeight() {
-    var h = Math.max(
+  function pageHeight() {
+    return Math.max(
       document.body.scrollHeight,
-      document.documentElement.scrollHeight
+      document.documentElement.scrollHeight,
+      document.body.offsetHeight,
+      document.documentElement.offsetHeight
     );
-    parent.postMessage({ type: "IFRAME_HEIGHT", height: h }, "*");
+  }
+
+  function sendHeight() {
+    parent.postMessage(
+      { type: "IFRAME_HEIGHT", height: pageHeight() },
+      "*"
+    );
   }
 
   window.addEventListener("load", sendHeight);
   window.addEventListener("resize", sendHeight);
 
-  new MutationObserver(sendHeight).observe(document.documentElement, {
-    childList: true,
-    subtree: true,
-    attributes: true,
-    characterData: true
-  });
-
-  setInterval(sendHeight, 800);
+  // TeX4ht pages can grow after CSS/fonts load; update height for a few seconds
+  let count = 0;
+  const timer = setInterval(() => {
+    sendHeight();
+    if (++count > 20) clearInterval(timer); // ~10 seconds
+  }, 500);
 })();
-</script>
