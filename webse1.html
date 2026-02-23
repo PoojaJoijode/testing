@@ -1054,5 +1054,13 @@ href="web.html#webse1.html" >up</a>] </p></div>
 <!--l. 18--><p class="noindent" ><a 
  id="tailwebse1.html"></a></p> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/iframe-resizer/4.3.2/iframeResizer.contentWindow.min.js"></script>
-
+<script>
+  // update parent hash so refresh stays on same inner page
+  (function () {
+    if (window.top !== window.self) {
+      var file = location.pathname.split("/").pop();
+      window.top.location.hash = file;
+    }
+  })();
+</script>
 </body></html> 
