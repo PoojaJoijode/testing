@@ -5,10 +5,12 @@
 
   function notifyParent() {
     if (window.top !== window.self) {
-      window.top.postMessage(
-        { type: "inner-page-changed", page: getFileName() },
-        "*"
-      );
+      try {
+        window.top.postMessage(
+          { type: "inner-page-changed", page: getFileName() },
+          "*"
+        );
+      } catch (e) {}
     }
   }
 
