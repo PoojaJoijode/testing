@@ -1,19 +1,17 @@
-// navigation-sync.js
 (function () {
-  function getFileName() {
-    return location.pathname.split("/").pop() || "index.html";
-  }
-
-  function notifyParent() {
+  function updateParentHash() {
     if (window.top !== window.self) {
-      var file = getFileName();
+      var file = location.pathname.split("/").pop();
 
       try {
         if (window.top.location.hash !== "#" + file) {
           window.top.history.pushState(null, "", "#" + file);
         }
       } catch (e) {
-        // ignore cross-frame/history issues
+        // fallback
+        try {
+          window.top.location.hash = file;
+        } catch (err) {}
       }
 
       try {
@@ -21,15 +19,13 @@
           { type: "inner-page-changed", page: file },
           "*"
         );
-      } catch (e) {
-        // ignore message errors
-      }
+      } catch (e) {}
     }
   }
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", notifyParent);
+    document.addEventListener("DOMContentLoaded", updateParentHash);
   } else {
-    notifyParent();
+    updateParentHash();
   }
 })();
