@@ -1,4 +1,4 @@
-(function () {
+window.addEventListener("DOMContentLoaded", function () {
   const BASE = "https://poojajoijode.github.io/testing/";
   const DEFAULT = "webli1.html";
   const frame = document.getElementById("pubFrame");
@@ -6,35 +6,45 @@
 
   if (!frame) return;
 
-  const currentFile = () =>
-    new URLSearchParams(window.location.search).get("page") || DEFAULT;
+  function currentFile() {
+    return new URLSearchParams(window.location.search).get("page") || DEFAULT;
+  }
 
-  const frameSrc = (file) => BASE + file;
+  function frameSrc(file) {
+    return BASE + file;
+  }
 
-  const scrollTop = () => {
+  function scrollTopNow() {
     window.scrollTo(0, 0);
     document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0;
-  };
+  }
 
-  const updateUrl = (file, mode) => {
+  function updateUrl(file, mode) {
     const url = new URL(window.location.href);
     url.searchParams.set("page", file);
-    history[mode === "push" ? "pushState" : "replaceState"](null, "", url);
-  };
 
-  const loadFromUrl = () => {
+    if (mode === "push") {
+      history.pushState(null, "", url);
+    } else {
+      history.replaceState(null, "", url);
+    }
+  }
+
+  function loadFromUrl() {
     const file = currentFile();
     const src = frameSrc(file);
 
     suppressSync = true;
-    if (frame.getAttribute("src") !== src) frame.setAttribute("src", src);
-    scrollTop();
+    if (frame.getAttribute("src") !== src) {
+      frame.setAttribute("src", src);
+    }
+    scrollTopNow();
 
-    setTimeout(() => {
+    setTimeout(function () {
       suppressSync = false;
     }, 300);
-  };
+  }
 
   if ("scrollRestoration" in history) {
     history.scrollRestoration = "manual";
@@ -60,18 +70,24 @@
     const file = event.data.page || DEFAULT;
 
     if (event.data.type === "sync-page") {
-      if (!suppressSync && currentFile() !== file) updateUrl(file, "replace");
-      scrollTop();
+      if (!suppressSync && currentFile() !== file) {
+        updateUrl(file, "replace");
+      }
+      scrollTopNow();
       return;
     }
 
     if (event.data.type === "navigate-page") {
-      if (currentFile() !== file) updateUrl(file, "push");
+      if (currentFile() !== file) {
+        updateUrl(file, "push");
+      }
 
       const src = frameSrc(file);
-      if (frame.getAttribute("src") !== src) frame.setAttribute("src", src);
+      if (frame.getAttribute("src") !== src) {
+        frame.setAttribute("src", src);
+      }
 
-      scrollTop();
+      scrollTopNow();
     }
   });
-})();
+});
