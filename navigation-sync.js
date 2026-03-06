@@ -1,49 +1,35 @@
+// navigation-sync.js
 (function () {
   function getFileName() {
-    return location.pathname.split("/").pop() || "webli1.html";
+    return location.pathname.split("/").pop() || "index.html";
   }
 
-  function postToParent(payload) {
+  function notifyParent() {
     if (window.top !== window.self) {
+      var file = getFileName();
+
       try {
-        window.top.postMessage(payload, "*");
-      } catch (e) {}
+        if (window.top.location.hash !== "#" + file) {
+          window.top.history.pushState(null, "", "#" + file);
+        }
+      } catch (e) {
+        // ignore cross-frame/history issues
+      }
+
+      try {
+        window.top.postMessage(
+          { type: "inner-page-changed", page: file },
+          "*"
+        );
+      } catch (e) {
+        // ignore message errors
+      }
     }
   }
-
-  function syncCurrentPage() {
-    postToParent({ type: "sync-page", page: getFileName() });
-  }
-
-  document.addEventListener("click", function (e) {
-    var a = e.target.closest("a");
-    if (!a) return;
-
-    var href = a.getAttribute("href");
-    if (!href) return;
-
-    if (
-      href.startsWith("#") ||
-      href.startsWith("mailto:") ||
-      href.startsWith("tel:") ||
-      href.startsWith("javascript:") ||
-      href.startsWith("http://") ||
-      href.startsWith("https://")
-    ) {
-      return;
-    }
-
-    if (/\.html?($|[?#])/.test(href)) {
-      postToParent({
-        type: "navigate-page",
-        page: href.split("#")[0].split("?")[0]
-      });
-    }
-  });
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", syncCurrentPage);
+    document.addEventListener("DOMContentLoaded", notifyParent);
   } else {
-    syncCurrentPage();
+    notifyParent();
   }
 })();
