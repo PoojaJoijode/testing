@@ -11,15 +11,10 @@
     }
   }
 
-  // Tell parent which page is currently loaded
   function syncCurrentPage() {
-    postToParent({
-      type: "sync-page",
-      page: getFileName()
-    });
+    postToParent({ type: "sync-page", page: getFileName() });
   }
 
-  // Catch internal link clicks before browser navigates
   document.addEventListener("click", function (e) {
     var a = e.target.closest("a");
     if (!a) return;
@@ -27,7 +22,6 @@
     var href = a.getAttribute("href");
     if (!href) return;
 
-    // ignore anchors, mailto, tel, external links, javascript links
     if (
       href.startsWith("#") ||
       href.startsWith("mailto:") ||
@@ -39,7 +33,6 @@
       return;
     }
 
-    // only handle html files in same folder
     if (/\.html?($|[?#])/.test(href)) {
       postToParent({
         type: "navigate-page",
