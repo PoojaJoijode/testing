@@ -1,33 +1,14 @@
-// navigation-sync.js
 (function () {
   function getFileName() {
-    return location.pathname.split("/").pop() || "index.html";
+    return location.pathname.split("/").pop() || "webli1.html";
   }
 
   function notifyParent() {
     if (window.top !== window.self) {
-      var file = getFileName();
-
-      try {
-        if (window.top.location.hash !== "#" + file) {
-          window.top.history.pushState(null, "", "#" + file);
-        }
-      } catch (e) {
-        try {
-          window.top.location.hash = file;
-        } catch (err) {
-          // ignore cross-frame/hash issues
-        }
-      }
-
-      try {
-        window.top.postMessage(
-          { type: "inner-page-changed", page: file },
-          "*"
-        );
-      } catch (e) {
-        // ignore message errors
-      }
+      window.top.postMessage(
+        { type: "inner-page-changed", page: getFileName() },
+        "*"
+      );
     }
   }
 
