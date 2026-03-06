@@ -6,39 +6,22 @@
   if (!frame) return;
 
   function currentFile() {
-    const h = (window.location.hash || "").replace(/^#/, "").trim();
-    return h || DEFAULT;
-  }
-
-  function scrollTopNow() {
-    window.scrollTo(0, 0);
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
+    const p = new URLSearchParams(window.location.search).get("page");
+    return p || DEFAULT;
   }
 
   function setFrameSrc() {
     const file = currentFile();
-    const newSrc = BASE + file;
+    const src = BASE + file;
 
-    if (frame.getAttribute("src") !== newSrc) {
-      frame.setAttribute("src", newSrc);
+    if (frame.getAttribute("src") !== src) {
+      frame.setAttribute("src", src);
     }
 
-    scrollTopNow();
-    setTimeout(scrollTopNow, 100);
-    setTimeout(scrollTopNow, 300);
-  }
-
-  if ("scrollRestoration" in history) {
-    history.scrollRestoration = "manual";
+    window.scrollTo(0, 0);
   }
 
   setFrameSrc();
-
-  frame.addEventListener("load", function () {
-    scrollTopNow();
-    setTimeout(scrollTopNow, 100);
-  });
 
   iFrameResize(
     {
@@ -49,22 +32,23 @@
     "#pubFrame"
   );
 
-  window.addEventListener("hashchange", setFrameSrc);
-  window.addEventListener("popstate", setFrameSrc);
-
   window.addEventListener("message", function (event) {
     if (event.origin !== "https://poojajoijode.github.io") return;
+    if (!event.data || event.data.type !== "inner-page-changed") return;
 
-    if (event.data && event.data.type === "inner-page-changed") {
-      const file = event.data.page || DEFAULT;
+    const file = event.data.page || DEFAULT;
+    const url = new URL(window.location.href);
+    url.searchParams.set("page", file);
+    history.pushState(null, "", url);
 
-      if (window.location.hash !== "#" + file) {
-        history.pushState(null, "", "#" + file);
-      }
-
-      scrollTopNow();
-      setTimeout(scrollTopNow, 100);
-      setTimeout(scrollTopNow, 300);
+    if (frame.getAttribute("src") !== BASE + file) {
+      frame.setAttribute("src", BASE + file);
     }
+
+    window.scrollTo(0, 0);
+  });
+
+  window.addEventListener("popstate", function () {
+    setFrameSrc();
   });
 })();
