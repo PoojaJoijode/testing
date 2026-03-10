@@ -44,7 +44,7 @@
       var page = href.split("#")[0].split("?")[0];
       var hash = href.includes("#") ? "#" + href.split("#").slice(1).join("#") : "";
 
-      // Only intercept when actually inside iframe/WordPress mode
+      // Only intercept when page is inside iframe
       if (window.top !== window.self) {
         e.preventDefault();
         e.stopPropagation();
@@ -55,7 +55,7 @@
           hash: hash
         });
       }
-      // else: direct GitHub/file open -> let browser follow normally
+      // Otherwise do nothing and let browser navigate normally
     }
   });
 
