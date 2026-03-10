@@ -7,8 +7,12 @@
     if (window.top !== window.self) {
       try {
         window.top.postMessage(payload, "*");
-      } catch (e) {}
+        return true;
+      } catch (e) {
+        return false;
+      }
     }
+    return false;
   }
 
   function syncCurrentPage() {
@@ -37,13 +41,21 @@
     }
 
     if (/\.html?($|[?#])/.test(href)) {
-      e.preventDefault();   // this is the missing part
-      e.stopPropagation();
+      var page = href.split("#")[0].split("?")[0];
+      var hash = href.includes("#") ? "#" + href.split("#").slice(1).join("#") : "";
 
-      postToParent({
-        type: "navigate-page",
-        page: href.split("#")[0].split("?")[0]
-      });
+      // Only intercept when actually inside iframe/WordPress mode
+      if (window.top !== window.self) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        postToParent({
+          type: "navigate-page",
+          page: page,
+          hash: hash
+        });
+      }
+      // else: direct GitHub/file open -> let browser follow normally
     }
   });
 
