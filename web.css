@@ -265,6 +265,9 @@ a:hover{
 /* =========================================================
    TABLES (all tables)
    ========================================================= */
+/* =========================================================
+   TABLES (all tables)
+   ========================================================= */
 
 table{
   width: 100% !important;
@@ -301,7 +304,7 @@ tbody td{
   vertical-align: top;
   border-bottom: 1px solid var(--border);
   white-space: normal;
-  overflow-wrap: normal;
+  overflow-wrap: break-word;
   word-break: normal;
 }
 
@@ -326,7 +329,7 @@ table.tabular td{
   vertical-align: top !important;
   border-bottom: 1px solid var(--border) !important;
   white-space: normal !important;
-  overflow-wrap: normal !important;
+  overflow-wrap: break-word !important;
   word-break: normal !important;
   overflow: visible !important;
   text-overflow: clip !important;
@@ -349,100 +352,45 @@ table.tabular tr:hover{
   background: var(--surface-hover);
 }
 
-/* Safer wrapping for common TeX4ht text columns */
-table.tabular td:nth-child(2),
-table.tabular td:nth-child(3),
-table.tabular td:nth-child(4){
-  white-space: normal !important;
-  overflow-wrap: anywhere !important;
-  overflow: visible !important;
-  text-overflow: clip !important;
-}
+/* ---------------------------------------------------------
+   Generic TeX4ht column behavior for mixed table layouts
+   --------------------------------------------------------- */
 
-/* Keep date/term-like values on one line only if they are short */
-table.tabular td:nth-child(4){
+/* numbering / index columns */
+table.tabular td:first-child{
+  width: 1%;
   white-space: nowrap !important;
 }
 
-/* =========================================================
-   Publications-style TOC bars (TeX4ht)
-   ========================================================= */
-
-.tableofcontents{
-  max-width: 1100px;
-  margin-top: 12px !important;
-  margin-left: auto !important;
-  margin-right: auto !important;
+/* main text/title/description columns usually sit in col 2 */
+table.tabular td:nth-child(2){
+  white-space: normal !important;
+  overflow-wrap: break-word !important;
+  word-break: normal !important;
 }
 
-.tableofcontents br{
-  display: none !important;
+/* short metadata columns: dates, terms, degree, rounds, hours, etc. */
+table.tabular td:nth-child(3),
+table.tabular td:nth-child(4),
+table.tabular td:nth-child(5),
+table.tabular td:nth-child(6){
+  white-space: nowrap !important;
 }
 
-/* Each TOC line */
-.tableofcontents .sectionToc,
-.tableofcontents .likesectionToc,
-.tableofcontents .subsectionToc,
-.tableofcontents .likesubsectionToc,
-.tableofcontents .subsubsectionToc,
-.tableofcontents .likesubsubsectionToc,
-.tableofcontents .paragraphToc,
-.tableofcontents .likeparagraphToc{
-  display: block !important;
-  margin: 0 0 14px !important;
-  font-size: 0 !important;
+/* If a later column contains long text, let inline styles from HTML win naturally.
+   Do NOT hardcode colgroup widths. Do NOT force fixed layout. */
+
+/* horizontal line rows from TeX4ht */
+table.tabular tr.hline td{
+  padding: 0 !important;
+  background: transparent !important;
+  border-bottom: none !important;
 }
 
-/* Clickable bar */
-.tableofcontents .sectionToc a,
-.tableofcontents .likesectionToc a,
-.tableofcontents .subsectionToc a,
-.tableofcontents .likesubsectionToc a,
-.tableofcontents .subsubsectionToc a,
-.tableofcontents .likesubsubsectionToc a,
-.tableofcontents .paragraphToc a,
-.tableofcontents .likeparagraphToc a{
-  display: flex !important;
-  align-items: center;
-  gap: 16px;
-  padding: 18px 26px !important;
-  background: var(--brand) !important;
-  color: #ffffff !important;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
-  font-size: 18px !important;
-  font-weight: 700 !important;
-  line-height: 1.25 !important;
-  text-decoration: underline !important;
-  text-underline-offset: 4px;
-}
-
-.tableofcontents .sectionToc a::before,
-.tableofcontents .likesectionToc a::before,
-.tableofcontents .subsectionToc a::before,
-.tableofcontents .likesubsectionToc a::before,
-.tableofcontents .subsubsectionToc a::before,
-.tableofcontents .likesubsubsectionToc a::before,
-.tableofcontents .paragraphToc a::before,
-.tableofcontents .likeparagraphToc a::before{
-  content: "";
-  flex: 0 0 26px;
-  width: 26px;
-  height: 26px;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path fill='%23facc15' d='M4 11h11.17l-4.58-4.59L12 5l7 7-7 7-1.41-1.41L15.17 13H4z'/></svg>");
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  background-position: center;
-  text-decoration: none !important;
-}
-
-.tableofcontents a:hover{
-  background: var(--brand-dark) !important;
-  color: #ffffff !important;
-}
-
-/* Hide TOC markers if TeX4ht uses spans */
-.tableofcontents .titlemark,
-.tableofcontents .label{
-  display: none !important;
+table.tabular tr.hline hr{
+  margin: 0 !important;
+  border: 0 !important;
+  border-top: 1px solid var(--border-strong) !important;
+  height: 0 !important;
 }
 
